@@ -1,0 +1,443 @@
+/* =====================================================================
+   KONNEX FEST — BOARDING PASS REGISTRATION PORTAL
+   External stylesheet (Section B.1: main website design)
+   Organised as: Tokens -> Reset -> Header -> Hero(*) -> Filter bar
+   -> Ticket cards & flip -> Registration form -> Footer -> Help button
+   -> Responsive
+   (*) Hero visual rules live in an internal <style> block in index.html.
+   Signature interaction: the category filter and card flip below run
+   entirely on CSS (radio inputs + sibling selectors, 3D transforms) —
+   no JavaScript anywhere in this project.
+===================================================================== */
+
+/* ---------------------------------------------------------------------
+   1. DESIGN TOKENS
+--------------------------------------------------------------------- */
+:root {
+  --color-ink: #10161F;        /* night-sky navy-black */
+  --color-paper: #F1F4F2;      /* soft cloud grey */
+  --color-slate: #2B2E36;
+  --color-red: #E1432D;        /* airline-style accent */
+  --color-teal: #2F7A6D;       /* open / boarding status */
+  --color-amber: #D9A441;      /* waitlist status */
+  --color-line: #D8DEDA;
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Archivo", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  --radius-card: 16px;
+  --shadow-card: 0 14px 26px -16px rgba(20, 23, 28, 0.4);
+}
+
+/* ---------------------------------------------------------------------
+   2. RESET & BASE
+--------------------------------------------------------------------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-slate);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255,255,255,0.9), transparent 38%),
+    radial-gradient(circle at 88% 30%, rgba(255,255,255,0.7), transparent 42%),
+    var(--color-paper);
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+h1, h2, h3 { font-family: var(--font-display); margin: 0 0 0.5rem; }
+a { color: inherit; text-decoration: none; }
+
+/* ---------------------------------------------------------------------
+   3. HEADER — sticky positioning (Section B.5)
+--------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(20, 23, 28, 0.95);
+  border-bottom: 1px dashed rgba(241, 244, 242, 0.25);
+}
+.site-header__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.9rem 6vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.brand { display: flex; align-items: center; gap: 0.6rem; color: var(--color-paper); font-family: var(--font-display); letter-spacing: 0.02em; }
+.brand__mark {
+  display: grid; place-items: center;
+  width: 2.1rem; height: 2.1rem;
+  border-radius: 50%;
+  background: var(--color-red);
+  color: var(--color-paper);
+  font-size: 1rem;
+}
+.brand__text em { color: var(--color-red); font-style: normal; }
+.main-nav ul { list-style: none; display: flex; align-items: center; gap: 1.6rem; margin: 0; padding: 0; }
+
+/* attribute selector — nav links generically */
+.main-nav ul li a[href] {
+  color: var(--color-paper);
+  font-size: 0.9rem;
+  padding: 0.3rem 0.1rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.main-nav ul li a[href]:hover,
+.main-nav ul li a[href]:focus-visible {
+  color: var(--color-red);
+  border-bottom-color: var(--color-red);
+  outline: none;
+}
+.main-nav__cta {
+  background: var(--color-red);
+  color: var(--color-paper) !important;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  border-bottom: none !important;
+}
+
+/* ---------------------------------------------------------------------
+   4. HERO SUB / CTA
+--------------------------------------------------------------------- */
+.hero__sub { max-width: 54ch; color: rgba(241, 244, 242, 0.82); margin-bottom: 1.8rem; }
+.btn { display: inline-block; font-weight: 600; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.btn--primary {
+  background: var(--color-red);
+  color: var(--color-paper);
+  border: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  box-shadow: 0 10px 20px -8px rgba(225, 67, 45, 0.55);
+}
+.btn--primary:hover, .btn--primary:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 26px -8px rgba(225, 67, 45, 0.65);
+}
+.btn--wide { width: 100%; text-align: center; padding: 0.9rem; font-size: 1rem; }
+
+/* ---------------------------------------------------------------------
+   5. SECTION HEADINGS
+--------------------------------------------------------------------- */
+.section-heading { max-width: 640px; margin: 0 auto 2rem; padding: 0 6vw; text-align: center; }
+.section-heading h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
+
+/* ---------------------------------------------------------------------
+   6. CSS-ONLY FILTER BAR
+   Radios are hidden; labels act as pills. Because the grid is a sibling
+   further down the same container, a checked radio can style siblings
+   via the general sibling combinator (~) with no JavaScript.
+--------------------------------------------------------------------- */
+#catalogue { padding: 3.5rem 6vw 4.5rem; }
+
+.filter-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.filter-input { position: absolute; opacity: 0; pointer-events: none; }
+.filter-pill {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem 1.75rem 0;
+  border: 1.5px solid var(--color-line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.filter-pill:hover { border-color: var(--color-red); color: var(--color-red); }
+
+/* pseudo-class :checked drives the active pill style */
+.filter-input:checked + .filter-pill {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-ink);
+}
+.filter-input:focus-visible + .filter-pill { outline: 2px solid var(--color-red); outline-offset: 2px; }
+
+/* Filtering logic: hide tickets that don't match the checked category */
+#filter-technical:checked ~ .ticket-grid .ticket:not(.ticket--technical),
+#filter-hackathon:checked ~ .ticket-grid .ticket:not(.ticket--hackathon),
+#filter-cultural:checked ~ .ticket-grid .ticket:not(.ticket--cultural),
+#filter-placement:checked ~ .ticket-grid .ticket:not(.ticket--placement) {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------
+   7. TICKET GRID — CSS Grid layout (Section B.4)
+--------------------------------------------------------------------- */
+.ticket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.75rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Card shell: content + padding + border + margin (Box Model, Section B.3) */
+.ticket {
+  position: relative;
+  border-radius: var(--radius-card);
+  margin: 0.25rem;                 /* margin */
+  perspective: 1400px;             /* enables the 3D flip on .ticket__inner */
+  height: 300px;
+}
+
+.ticket__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.ticket:hover .ticket__inner,
+.ticket:focus-within .ticket__inner { transform: rotateY(180deg); }
+
+.ticket__face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  background: #FFFFFF;
+  border: 2px solid var(--color-line);   /* border */
+  border-radius: var(--radius-card);
+  padding: 1.4rem 1.5rem;                /* padding */
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  overflow: hidden;
+}
+.ticket__face--back { transform: rotateY(180deg); background: var(--color-ink); color: var(--color-paper); }
+
+.ticket__gate {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-teal);
+}
+.ticket--hackathon .ticket__gate { color: #6C63C9; }
+.ticket--cultural   .ticket__gate { color: var(--color-red); }
+.ticket--placement  .ticket__gate { color: var(--color-ink); }
+
+.ticket__title { font-size: 1.1rem; margin-bottom: 0; }
+.ticket__meta { font-family: var(--font-mono); font-size: 0.8rem; color: #6B7280; margin: 0; }
+.ticket__venue { font-size: 0.85rem; color: #4B5262; margin: 0; }
+
+/* Barcode texture — signature motif, drawn with pure CSS gradients */
+.ticket__barcode {
+  margin-top: auto;
+  height: 26px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-ink) 0 2px, transparent 2px 4px,
+    var(--color-ink) 4px 5px, transparent 5px 9px,
+    var(--color-ink) 9px 12px, transparent 12px 15px
+  );
+  opacity: 0.85;
+}
+
+.ticket__flip-hint {
+  align-self: flex-end;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #9AA1AF;
+}
+
+.ticket__back-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-amber);
+  margin: 0;
+}
+
+/* Animated fill — purposeful transition, not just decoration */
+.seat-bar {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(241, 244, 242, 0.15);
+  overflow: hidden;
+  margin: 0.4rem 0 0.7rem;
+}
+.seat-bar__fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.9s ease 0.15s;
+  background: var(--color-teal);
+}
+.ticket:hover .seat-bar__fill,
+.ticket:focus-within .seat-bar__fill { transform: scaleX(var(--load, 0.5)); }
+.seat-bar__fill--technical { --load: 0.72; background: var(--color-teal); }
+.seat-bar__fill--hackathon { --load: 0.58; background: #6C63C9; }
+.seat-bar__fill--cultural  { --load: 0.91; background: var(--color-amber); }
+.seat-bar__fill--placement { --load: 1;    background: var(--color-red); }
+
+.ticket__back-note { font-size: 0.85rem; color: rgba(241, 244, 242, 0.8); margin: 0 0 0.6rem; }
+
+.ticket__cta {
+  margin-top: auto;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--color-paper);
+  border-bottom: 2px solid var(--color-red);
+  align-self: flex-start;
+  padding-bottom: 2px;
+}
+.ticket__cta--disabled { color: #9AA1AF; border-bottom-color: #444; cursor: not-allowed; pointer-events: none; }
+
+/* Absolute positioning + z-index — beyond normal flow (Section B.5) */
+.ticket__badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+}
+.ticket__badge--open     { background: rgba(47, 122, 109, 0.14); color: var(--color-teal); }
+.ticket__badge--waitlist { background: rgba(217, 164, 65, 0.18); color: #8A5A00; }
+.ticket__badge--closed   { background: rgba(225, 67, 45, 0.14); color: var(--color-red); }
+
+/* pseudo-element — perforation notch cut into the card edge */
+.ticket__face::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -11px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-paper);
+  transform: translateY(-50%);
+}
+
+/* ---------------------------------------------------------------------
+   8. REGISTRATION FORM
+--------------------------------------------------------------------- */
+.registration {
+  background: #FFFFFF;
+  border-top: 1px dashed var(--color-line);
+  border-bottom: 1px dashed var(--color-line);
+  padding: 4rem 6vw 4.5rem;
+}
+.reg-form {
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--color-paper);
+  border: 2px dashed var(--color-line);
+  border-radius: var(--radius-card);
+  padding: 2rem;
+}
+.reg-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem 1.5rem;
+  margin-bottom: 1.75rem;
+}
+.field--wide { grid-column: 1 / -1; }
+.field label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--color-ink); }
+.required { color: var(--color-red); }
+.field input, .field select {
+  width: 100%;
+  font: inherit;
+  padding: 0.65rem 0.8rem;
+  border: 1.5px solid var(--color-line);
+  border-radius: 8px;
+  background: #FFFFFF;
+  color: var(--color-slate);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.field input:focus-visible, .field select:focus-visible {
+  outline: none;
+  border-color: var(--color-teal);
+  box-shadow: 0 0 0 3px rgba(47, 122, 109, 0.18);
+}
+.field__hint { font-size: 0.78rem; color: #7A8194; margin: 0.35rem 0 0; }
+
+/* ---------------------------------------------------------------------
+   9. FIXED HELP BUTTON — positioning demo
+--------------------------------------------------------------------- */
+.help-fab {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 60;
+  width: 3rem; height: 3rem;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: var(--color-red);
+  font-size: 1.2rem;
+  box-shadow: 0 10px 20px -8px rgba(20, 23, 28, 0.55);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.help-fab:hover, .help-fab:focus-visible { transform: translateY(-3px); background: var(--color-teal); }
+
+/* ---------------------------------------------------------------------
+   10. FOOTER
+--------------------------------------------------------------------- */
+.site-footer { background: var(--color-ink); color: rgba(241, 244, 242, 0.85); padding: 3rem 6vw 1.5rem; }
+.site-footer__inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; flex-wrap: wrap; gap: 2.5rem;
+  justify-content: space-between; margin-bottom: 2rem;
+}
+.site-footer h3 { color: var(--color-red); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.brand__mark--footer {
+  width: 2.4rem; height: 2.4rem;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--color-red);
+  color: var(--color-paper);
+  margin-bottom: 0.6rem;
+}
+.footer-links { list-style: none; padding: 0; margin: 0; }
+.footer-links li { margin-bottom: 0.4rem; }
+.footer-links a:hover { color: var(--color-red); }
+.site-footer__copyright {
+  text-align: center;
+  font-size: 0.78rem;
+  color: rgba(241, 244, 242, 0.55);
+  border-top: 1px solid rgba(241, 244, 242, 0.15);
+  padding-top: 1.2rem;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------
+   11. RESPONSIVE — media query (Section B.7)
+--------------------------------------------------------------------- */
+@media (max-width: 720px) {
+  .main-nav ul li:nth-child(1), .main-nav ul li:nth-child(2) { display: none; }
+  .hero { padding: 3rem 6vw 3.5rem; }
+  .ticket-grid { grid-template-columns: 1fr; }
+  .ticket { height: 320px; }
+  .reg-form__grid { grid-template-columns: 1fr; }
+  .site-footer__inner { flex-direction: column; gap: 1.75rem; }
+  .help-fab { width: 2.6rem; height: 2.6rem; right: 1rem; bottom: 1rem; }
+  .filter-pill { margin-bottom: 0.75rem; }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .ticket__inner, .seat-bar__fill, .btn, .help-fab { transition: none !important; }
+}

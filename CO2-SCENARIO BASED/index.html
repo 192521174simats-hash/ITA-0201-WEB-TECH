@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konnex Fest &mdash; Boarding Pass Registration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Archivo:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<!-- ============================================
+     INTERNAL CSS DEMONSTRATION (Section B.1)
+     Scoped to the Hero "departure board" only.
+============================================= -->
+<style>
+  .hero {
+    background:
+      radial-gradient(circle at 18% 115%, rgba(225,67,45,0.16), transparent 45%),
+      repeating-radial-gradient(circle at 10% 20%, rgba(217,164,65,0.9) 0 1.5px, transparent 1.5px 90px),
+      repeating-radial-gradient(circle at 70% 60%, rgba(217,164,65,0.7) 0 1.5px, transparent 1.5px 120px),
+      linear-gradient(165deg, #0B1220 0%, #101B31 55%, #0A0F1A 100%);
+    color: #F1F4F2;
+    padding: 4.5rem 6vw 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero__eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    color: #E1432D;
+  }
+  .hero__title {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(2.1rem, 4.6vw, 3.7rem);
+    line-height: 1.04;
+    margin: 0.7rem 0 1.1rem;
+    max-width: 17ch;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     HEADER — sticky "check-in counter" nav
+============================================= -->
+<header class="site-header" id="top">
+  <div class="site-header__inner">
+    <a href="#top" class="brand">
+      <span class="brand__mark">&#9992;</span>
+      <span class="brand__text">KONNEX <em>FEST</em></span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#catalogue">Departures</a></li>
+        <li><a href="#register">Check&#8209;in</a></li>
+        <li><a href="#footer-contact">Contact</a></li>
+        <li><a href="#" class="main-nav__cta">Track status</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================================
+     HERO — departure-board framing
+============================================= -->
+<section class="hero">
+  <p class="hero__eyebrow">Gate opens 18 Sep &middot; Anna Nagar Campus</p>
+  <h1 class="hero__title">Your pass. Four gates. One badge to board them all.</h1>
+  <p class="hero__sub">Every workshop, hack night, cultural stage and placement drive boards from the same pass. Pick your gates below, then check in once.</p>
+  <a href="#register" class="btn btn--primary">Print my boarding pass &rarr;</a>
+</section>
+
+<main>
+<!-- ============================================
+     EVENT CATALOGUE — CSS-only gate filter
+     (no JavaScript: radio inputs + sibling selectors)
+============================================= -->
+<section class="catalogue" id="catalogue">
+  <div class="section-heading">
+    <h2>Choose your gate</h2>
+    <p>Tap a gate to filter &mdash; this filter runs on CSS alone, no scripts involved. Hover any pass to flip it and see seat load and crew notes.</p>
+  </div>
+
+  <!-- CSS-only filter: radios live as siblings before the grid -->
+  <div class="filter-bar" role="tablist" aria-label="Filter events by category">
+    <input type="radio" name="gate-filter" id="filter-all" checked class="filter-input">
+    <label for="filter-all" class="filter-pill">All gates</label>
+
+    <input type="radio" name="gate-filter" id="filter-technical" class="filter-input">
+    <label for="filter-technical" class="filter-pill">Technical</label>
+
+    <input type="radio" name="gate-filter" id="filter-hackathon" class="filter-input">
+    <label for="filter-hackathon" class="filter-pill">Hackathon</label>
+
+    <input type="radio" name="gate-filter" id="filter-cultural" class="filter-input">
+    <label for="filter-cultural" class="filter-pill">Cultural</label>
+
+    <input type="radio" name="gate-filter" id="filter-placement" class="filter-input">
+    <label for="filter-placement" class="filter-pill">Placement</label>
+
+  <div class="ticket-grid">
+
+    <!-- Card 1 -->
+    <article class="ticket ticket--technical">
+      <div class="ticket__inner">
+        <div class="ticket__face ticket__face--front">
+          <span class="ticket__badge ticket__badge--open">Boarding</span>
+          <p class="ticket__gate">GATE&nbsp;A &middot; Technical</p>
+          <h3 class="ticket__title">Edge AI Build Sprint</h3>
+          <p class="ticket__meta"><span class="ticket__code">EVT&#8209;101</span> &middot; 19 Sep &middot; 10:00</p>
+          <p class="ticket__venue">CSE Seminar Hall 2</p>
+          <div class="ticket__barcode" aria-hidden="true"></div>
+          <span class="ticket__flip-hint">Hover to flip &#8635;</span>
+        </div>
+        <div class="ticket__face ticket__face--back">
+          <p class="ticket__back-label">Seat load</p>
+          <div class="seat-bar"><span class="seat-bar__fill seat-bar__fill--technical"></span></div>
+          <p class="ticket__back-note">Bring a laptop with Python 3.10+. Mentors from the AI club run this sprint in pairs.</p>
+          <a href="#register" class="ticket__cta">Register for this gate</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="ticket ticket--hackathon">
+      <div class="ticket__inner">
+        <div class="ticket__face ticket__face--front">
+          <span class="ticket__badge ticket__badge--open">Boarding</span>
+          <p class="ticket__gate">GATE&nbsp;B &middot; Hackathon</p>
+          <h3 class="ticket__title">Konnex 24hr Hack</h3>
+          <p class="ticket__meta"><span class="ticket__code">EVT&#8209;204</span> &middot; 20&ndash;21 Sep &middot; Overnight</p>
+          <p class="ticket__venue">Innovation Block, Floor 3</p>
+          <div class="ticket__barcode" aria-hidden="true"></div>
+          <span class="ticket__flip-hint">Hover to flip &#8635;</span>
+        </div>
+        <div class="ticket__face ticket__face--back">
+          <p class="ticket__back-label">Seat load</p>
+          <div class="seat-bar"><span class="seat-bar__fill seat-bar__fill--hackathon"></span></div>
+          <p class="ticket__back-note">Teams of up to four. Power outlets and overnight snacks provided at the innovation block.</p>
+          <a href="#register" class="ticket__cta">Register for this gate</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="ticket ticket--cultural">
+      <div class="ticket__inner">
+        <div class="ticket__face ticket__face--front">
+          <span class="ticket__badge ticket__badge--waitlist">Waitlist</span>
+          <p class="ticket__gate">GATE&nbsp;C &middot; Cultural</p>
+          <h3 class="ticket__title">Rangmanch Battle of Bands</h3>
+          <p class="ticket__meta"><span class="ticket__code">EVT&#8209;318</span> &middot; 21 Sep &middot; 18:00</p>
+          <p class="ticket__venue">Open&#8209;Air Amphitheatre</p>
+          <div class="ticket__barcode" aria-hidden="true"></div>
+          <span class="ticket__flip-hint">Hover to flip &#8635;</span>
+        </div>
+        <div class="ticket__face ticket__face--back">
+          <p class="ticket__back-label">Seat load</p>
+          <div class="seat-bar"><span class="seat-bar__fill seat-bar__fill--cultural"></span></div>
+          <p class="ticket__back-note">Six campus bands compete for the Konnex Cup. Waitlisted passes are called in order.</p>
+          <a href="#register" class="ticket__cta">Join the waitlist</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 4 -->
+    <article class="ticket ticket--placement">
+      <div class="ticket__inner">
+        <div class="ticket__face ticket__face--front">
+          <span class="ticket__badge ticket__badge--closed">Closed</span>
+          <p class="ticket__gate">GATE&nbsp;D &middot; Placement</p>
+          <h3 class="ticket__title">Industry Connect Drive</h3>
+          <p class="ticket__meta"><span class="ticket__code">EVT&#8209;422</span> &middot; 22 Sep &middot; 09:00</p>
+          <p class="ticket__venue">Placement Cell, Block A</p>
+          <div class="ticket__barcode" aria-hidden="true"></div>
+          <span class="ticket__flip-hint">Hover to flip &#8635;</span>
+        </div>
+        <div class="ticket__face ticket__face--back">
+          <p class="ticket__back-label">Seat load</p>
+          <div class="seat-bar"><span class="seat-bar__fill seat-bar__fill--placement"></span></div>
+          <p class="ticket__back-note">Pre-registration is closed. Walk-in resume clinics still run from 09:00 outside Block A.</p>
+          <a href="#register" class="ticket__cta ticket__cta--disabled" aria-disabled="true">Registration closed</a>
+        </div>
+      </div>
+    </article>
+
+  </div><!-- /.ticket-grid -->
+  </div><!-- /.filter-bar -->
+</section>
+
+<!-- ============================================
+     REGISTRATION FORM — "check-in desk"
+============================================= -->
+<section class="registration" id="register">
+  <div class="section-heading">
+    <h2>Check in</h2>
+    <p>One check-in covers every gate you selected above. Fields marked <span class="required">*</span> are required.</p>
+  </div>
+
+  <form class="reg-form" novalidate>
+    <div class="reg-form__grid">
+
+      <div class="field">
+        <label for="fullName">Full name <span class="required">*</span></label>
+        <input type="text" id="fullName" name="fullName" autocomplete="name" required placeholder="e.g. Priya Raman">
+      </div>
+
+      <div class="field">
+        <label for="regNo">Register number <span class="required">*</span></label>
+        <!-- Inline CSS demonstration (Section B.1) — this element only -->
+        <input type="text" id="regNo" name="regNo" required placeholder="e.g. 21ITR045"
+               style="font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.05em;">
+      </div>
+
+      <div class="field">
+        <label for="department">Department <span class="required">*</span></label>
+        <select id="department" name="department" required>
+          <option value="" disabled selected>Select department</option>
+          <option value="cse">Computer Science &amp; Engineering</option>
+          <option value="it">Information Technology</option>
+          <option value="ece">Electronics &amp; Communication</option>
+          <option value="mech">Mechanical Engineering</option>
+          <option value="civil">Civil Engineering</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="email">Email address <span class="required">*</span></label>
+        <input type="email" id="email" name="email" autocomplete="email" required placeholder="you@university.edu">
+      </div>
+
+      <div class="field field--wide">
+        <label for="events">Gate selection <span class="required">*</span></label>
+        <select id="events" name="events" multiple required size="4">
+          <option value="EVT-101">EVT-101 &middot; Edge AI Build Sprint</option>
+          <option value="EVT-204">EVT-204 &middot; Konnex 24hr Hack</option>
+          <option value="EVT-318">EVT-318 &middot; Rangmanch Battle of Bands (waitlist)</option>
+        </select>
+        <p class="field__hint">Hold Ctrl / Cmd to select more than one gate.</p>
+      </div>
+
+    </div>
+
+    <button type="submit" class="btn btn--primary btn--wide">Confirm check&#8209;in</button>
+  </form>
+</section>
+</main>
+
+<!-- Fixed help button — positioning demo (Section B.5) -->
+<a href="#top" class="help-fab" aria-label="Back to top">&uarr;</a>
+
+<!-- ============================================
+     FOOTER
+============================================= -->
+<footer class="site-footer" id="footer-contact">
+  <div class="site-footer__inner">
+    <div class="site-footer__col">
+      <p class="brand__mark brand__mark--footer">&#9992;</p>
+      <p>Anna Nagar University<br>Chennai, Tamil Nadu &middot; 600040</p>
+    </div>
+    <div class="site-footer__col">
+      <h3>Contact</h3>
+      <p>events@konnexfest.edu<br>+91 44 2345 6789</p>
+    </div>
+    <div class="site-footer__col">
+      <h3>Useful links</h3>
+      <ul class="footer-links">
+        <li><a href="#catalogue">Event catalogue</a></li>
+        <li><a href="#register">Registration form</a></li>
+        <li><a href="#top">Back to top</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="site-footer__copyright">&copy; 2026 Anna Nagar University &mdash; Konnex Fest. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
