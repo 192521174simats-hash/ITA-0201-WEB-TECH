@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Student Profile</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:#eef3f8;color:#222}
+.profile{max-width:900px;margin:40px auto;background:white;border-radius:18px;overflow:hidden;box-shadow:0 8px 25px #0002}
+header{background:linear-gradient(135deg,#ede9fe,#c084fc);color:white;text-align:center;padding:35px}
+header img{width:130px;height:130px;border-radius:50%;object-fit:cover;border:5px solid white}
+main{padding:30px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card{padding:20px;border:1px solid #ddd;border-radius:12px;background:#fafafa}
+h1,h2{margin-top:0}.skills span{display:inline-block;background:#e7ecff;padding:8px 12px;margin:5px;border-radius:20px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.profile{margin:15px}.profile main{padding:20px}}
+</style>
+</head>
+<body>
+<div class="profile">
+<header>
+<img src="https://via.placeholder.com/150" alt="Student photo">
+<h1>Sindhuja</h1><p>B.Tech Computer Science Engineering</p>
+</header>
+<main>
+<div class="grid">
+<section class="card"><h2>About Me</h2><p>I am a passionate computer science student interested in web development, programming and problem solving.</p></section>
+<section class="card"><h2>Contact</h2><p>Email: <a href="mailto:sindhu12@gmail.com">sindhu12@gmail.com</a></p><p>Phone: 9876543210</p></section>
+<section class="card"><h2>Education</h2><p>B.Tech CSE – ABC Engineering College</p><p>CGPA: 8.7</p></section>
+<section class="card"><h2>Skills</h2><div class="skills"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Python</span></div></section>
+</div>
+</main>
+</div>
+</body>
+</html>

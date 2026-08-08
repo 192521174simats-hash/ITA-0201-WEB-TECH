@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Online Quiz</title>
+<style>
+body{font-family:Arial;background:#eef2f7}.quiz{max-width:650px;margin:40px auto;background:white;padding:30px;border-radius:15px}.option{display:block;padding:12px;margin:8px 0;background:#f1f1f1;border-radius:7px;cursor:pointer}button{padding:12px 25px;background:#3457d5;color:#fff;border:0;border-radius:7px}
+</style></head><body><div class="quiz"><h1>Web Technology Quiz</h1><div id="question"></div><button onclick="next()">Next</button><h3 id="score"></h3></div>
+<script>
+const qs=[
+{q:"Which language structures a webpage?",o:["HTML","CSS","SQL","Python"],a:"HTML"},
+{q:"Which is used for styling?",o:["HTML","CSS","Java","C"],a:"CSS"},
+{q:"Which keyword declares a JavaScript variable?",o:["var","style","select","html"],a:"var"},
+{q:"Which method selects an element by ID?",o:["getElementById()","getClass()","query()","selectId()"],a:"getElementById()"}
+];let i=0,score=0;
+function show(){let x=qs[i];question.innerHTML=`<h2>${i+1}. ${x.q}</h2>`+x.o.map(v=>`<label class="option"><input type="radio" name="ans" value="${v}"> ${v}</label>`).join("");}
+function next(){let a=document.querySelector('input[name="ans"]:checked');if(!a){alert("Select an answer");return}if(a.value===qs[i].a)score++;i++;if(i<qs.length)show();else{question.innerHTML="<h2>Quiz Completed!</h2>";scoreEl=score;document.querySelector("button").style.display="none";document.getElementById("score").textContent=`Your Score: ${score}/${qs.length}`}}
+show();
+</script></body></html>

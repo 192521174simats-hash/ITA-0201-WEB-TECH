@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Result Analysis</title>
+<style>
+body{font-family:Arial;background:#f1f4f8}.box{max-width:800px;margin:30px auto;background:#fff;padding:25px;border-radius:15px}input{padding:10px;margin:5px;width:100px}button{padding:10px 20px;background:#3457d5;color:#fff;border:0;border-radius:6px}table{width:100%;margin-top:20px;border-collapse:collapse}th,td{border:1px solid #ccc;padding:10px;text-align:center}
+</style></head><body><div class="box"><h1>Student Result Analysis</h1>
+<input id="name" placeholder="Student name"><input id="m1" type="number" placeholder="Maths"><input id="m2" type="number" placeholder="Science"><input id="m3" type="number" placeholder="CS"><button onclick="analyze()">Analyze</button>
+<div id="result"></div></div>
+<script>
+function analyze(){
+let student=document.getElementById("name").value||"Student";
+let marks=[+m1.value,+m2.value,+m3.value]; let total=marks.reduce((a,b)=>a+b,0), avg=total/marks.length;
+let grade=avg>=90?"A+":avg>=80?"A":avg>=70?"B":avg>=60?"C":avg>=50?"D":"F";
+let highest=Math.max(...marks), lowest=Math.min(...marks);
+result.innerHTML=`<table><tr><th>Name</th><th>Total</th><th>Average</th><th>Highest</th><th>Lowest</th><th>Grade</th></tr><tr><td>${student}</td><td>${total}</td><td>${avg.toFixed(2)}</td><td>${highest}</td><td>${lowest}</td><td>${grade}</td></tr></table>`;
+}
+</script></body></html>

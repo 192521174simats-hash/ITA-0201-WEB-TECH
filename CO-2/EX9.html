@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Shopping Cart</title>
+<style>
+body{font-family:Arial;background:#eef2f7}.shop{max-width:850px;margin:30px auto;background:white;padding:25px;border-radius:15px}.products{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.product{border:1px solid #ddd;padding:15px;border-radius:10px}.product button{padding:9px;background:#3457d5;color:#fff;border:0;border-radius:5px}.cart{margin-top:25px}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ccc;padding:10px;text-align:center}.bill{font-size:18px;text-align:right;margin-top:15px}
+@media(max-width:650px){.products{grid-template-columns:1fr}}
+</style></head><body><div class="shop"><h1>Product Shopping Cart</h1><div class="products" id="products"></div><div class="cart"><h2>Cart</h2><table><thead><tr><th>Product</th><th>Price</th><th>Qty</th><th>Total</th><th>Action</th></tr></thead><tbody id="cartBody"></tbody></table><div class="bill" id="bill"></div></div></div>
+<script>
+const products=[{name:"Laptop",price:55000},{name:"Headphones",price:2000},{name:"Keyboard",price:1200}];let cart=[];
+products.forEach((p,i)=>productsEl=document.getElementById("products").innerHTML+=`<div class="product"><h3>${p.name}</h3><p>₹${p.price}</p><button onclick="add(${i})">Add to Cart</button></div>`);
+function add(i){let x=cart.find(c=>c.name===products[i].name);x?x.qty++:cart.push({...products[i],qty:1});render()}
+function remove(i){cart.splice(i,1);render()}function change(i,q){cart[i].qty=Math.max(1,+q);render()}
+function render(){cartBody.innerHTML=cart.map((c,i)=>`<tr><td>${c.name}</td><td>₹${c.price}</td><td><input type="number" min="1" value="${c.qty}" onchange="change(${i},this.value)"></td><td>₹${c.price*c.qty}</td><td><button onclick="remove(${i})">Remove</button></td></tr>`).join("");let subtotal=cart.reduce((s,c)=>s+c.price*c.qty,0),discount=subtotal>=50000?subtotal*.1:0,tax=(subtotal-discount)*.05,total=subtotal-discount+tax;bill.innerHTML=`Subtotal: ₹${subtotal.toFixed(2)}<br>Discount: ₹${discount.toFixed(2)}<br>Tax (5%): ₹${tax.toFixed(2)}<br><b>Total: ₹${total.toFixed(2)}</b>`}
+render();
+</script></body></html>

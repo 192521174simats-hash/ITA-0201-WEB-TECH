@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Debug CSS and JavaScript</title>
+<style>
+body{font-family:Arial;background:#eef2f7}.box{max-width:600px;margin:40px auto;background:white;padding:30px;border-radius:15px}#output{padding:15px;background:#eee;margin-top:15px}.good{color:green}.bad{color:red}button{padding:10px 20px}
+</style></head><body><div class="box"><h1>Debugging Demo</h1><p id="message">Click the button to test the JavaScript.</p><button id="testBtn">Run Test</button><div id="output"></div></div>
+<script>
+"use strict";
+const button=document.getElementById("testBtn");
+const output=document.getElementById("output");
+button.addEventListener("click",function(){
+try{
+let numbers=[10,20,30,40];
+let total=numbers.reduce((sum,n)=>sum+n,0);
+let average=total/numbers.length;
+if(Number.isNaN(average)) throw new Error("Invalid calculation");
+output.innerHTML=`<p class="good">✓ JavaScript executed correctly.</p><p>Total: ${total}</p><p>Average: ${average}</p>`;
+console.log("Debug information:",{numbers,total,average});
+}catch(error){
+console.error("Error:",error);output.innerHTML=`<p class="bad">Error: ${error.message}</p>`;
+}
+});
+</script></body></html>

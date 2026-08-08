@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Digital Clock & Countdown</title>
+<style>
+body{font-family:Arial;background:#581c87;color:white;text-align:center}.clock{margin:50px auto;max-width:600px}.time{font-size:60px;margin:30px}.count{font-size:40px}input,button{padding:12px;margin:5px}button{cursor:pointer}
+</style></head><body><div class="clock"><h1>Digital Clock</h1><div class="time" id="time"></div><h2>Examination Countdown Timer</h2><input id="minutes" type="number" min="1" placeholder="Minutes"><button onclick="startTimer()">Start</button><div class="count" id="count">00:00</div></div>
+<script>
+function updateClock(){time.textContent=new Date().toLocaleTimeString()}setInterval(updateClock,1000);updateClock();
+let timer;
+function startTimer(){clearInterval(timer);let sec=parseInt(minutes.value)*60;if(!sec)return;function tick(){let m=Math.floor(sec/60),s=sec%60;count.textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;if(sec<=0){clearInterval(timer);alert("Time is up!")}sec--}tick();timer=setInterval(tick,1000)}
+</script></body></html>

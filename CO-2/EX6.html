@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Dynamic To-Do List</title>
+<style>
+body{font-family:Arial;background:#eef2f7}.todo{max-width:600px;margin:40px auto;background:#fff;padding:25px;border-radius:15px}.add{display:flex;gap:8px}.add input{flex:1;padding:12px}.add button{padding:12px;background:#3457d5;color:white;border:0}.task{display:flex;align-items:center;justify-content:space-between;padding:12px;margin-top:10px;background:#f3f3f3;border-radius:8px}.task span{flex:1}.done{text-decoration:line-through;color:#888}.task button{margin-left:5px;padding:7px;border:0;border-radius:5px}
+</style></head><body><div class="todo"><h1>To-Do List</h1><div class="add"><input id="taskInput" placeholder="Enter a task"><button onclick="addTask()">Add</button></div><div id="list"></div></div>
+<script>
+let tasks=[];
+function render(){list.innerHTML="";tasks.forEach((t,i)=>{list.innerHTML+=`<div class="task"><input type="checkbox" ${t.done?"checked":""} onchange="toggle(${i})"><span class="${t.done?"done":""}">${t.text}</span><button onclick="editTask(${i})">Edit</button><button onclick="deleteTask(${i})">Delete</button></div>`})}
+function addTask(){let v=taskInput.value.trim();if(v){tasks.push({text:v,done:false});taskInput.value="";render()}}
+function toggle(i){tasks[i].done=!tasks[i].done;render()}
+function deleteTask(i){tasks.splice(i,1);render()}
+function editTask(i){let v=prompt("Edit task:",tasks[i].text);if(v&&v.trim()){tasks[i].text=v.trim();render()}}
+taskInput.addEventListener("keydown",e=>{if(e.key==="Enter")addTask()});
+</script></body></html>
