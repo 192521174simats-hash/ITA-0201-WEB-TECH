@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ignite &mdash; Anna Presidency University Event Registration Portal</title>
+
+<!-- External stylesheet: primary CSS for the entire site -->
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<!--
+  INTERNAL CSS DEMONSTRATION
+  The rules below are scoped ONLY to the Hero section (#hero) as required by
+  the assignment brief. All other page styling lives in the external file
+  style.css. This block is kept small and clearly labelled on purpose.
+-->
+<style>
+  /* --- Internal CSS: applies only to the Hero campaign section --- */
+  #hero {
+    background:
+      radial-gradient(circle at 18% 20%, rgba(0, 194, 204, 0.35), transparent 55%),
+      linear-gradient(135deg, #12213f 0%, #1b2a4a 55%, #101a30 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 14px);
+    pointer-events: none;
+  }
+  #hero .hero-eyebrow {
+    letter-spacing: 0.18em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header id="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">AP</span>
+      <div class="brand-text">
+        <span class="brand-university">Anna Presidency University</span>
+        <span class="brand-portal">Ignite &mdash; Event Registration Portal</span>
+      </div>
+    </div>
+    <nav aria-label="Primary">
+      <ul class="nav-menu">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#catalogue">Events</a></li>
+        <li><a href="#register">Register</a></li>
+        <li><a href="#site-footer">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">ANNUAL TECH &amp; CULTURAL FESTIVAL</p>
+    <h1>Register for <span class="accent">Ignite&nbsp;2026</span> before the gates close.</h1>
+    <p class="hero-sub">Workshops, hackathons, cultural nights and placement drives &mdash; one portal, one registration.</p>
+
+    <!-- INLINE CSS DEMONSTRATION: single small element, styled directly -->
+    <p class="campaign-window">Campaign window:
+      <strong style="color:#F5A623; letter-spacing:0.03em;">08&nbsp;Sept&nbsp;&ndash;&nbsp;22&nbsp;Sept&nbsp;2026</strong>
+    </p>
+
+    <a href="#register" class="cta-button">Start Registration</a>
+  </div>
+</section>
+
+<!-- ============ EVENT CATALOGUE ============ -->
+<main>
+<section id="catalogue" aria-labelledby="catalogue-heading">
+  <div class="section-inner">
+    <h2 id="catalogue-heading">This Year's Line-up</h2>
+    <p class="section-lead">Four tracks. Pick the ones that match your register number's destiny.</p>
+
+    <div class="event-grid">
+
+      <!-- Card 1: Technical -->
+      <article class="event-card" data-category="technical">
+        <span class="badge badge-technical">Technical</span>
+        <h3>Byte&nbsp;Storm Hackathon</h3>
+        <dl class="event-meta">
+          <div><dt>Date &amp; Time</dt><dd>12 Sept 2026, 9:00 AM</dd></div>
+          <div><dt>Venue</dt><dd>Innovation Block, Lab&nbsp;3</dd></div>
+        </dl>
+        <p class="event-desc">A 24-hour build sprint for teams of three, judged on working prototypes over slides.</p>
+        <p class="status status-open">Registration Open</p>
+        <button type="button" class="card-register" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Register</button>
+      </article>
+
+      <!-- Card 2: Cultural -->
+      <article class="event-card" data-category="cultural">
+        <span class="badge badge-cultural">Cultural</span>
+        <h3>Rhythm &amp; Roots Night</h3>
+        <dl class="event-meta">
+          <div><dt>Date &amp; Time</dt><dd>15 Sept 2026, 6:30 PM</dd></div>
+          <div><dt>Venue</dt><dd>Open Air Amphitheatre</dd></div>
+        </dl>
+        <p class="event-desc">Solo and group performances across dance, music and spoken word, open to every department.</p>
+        <p class="status status-open">Registration Open</p>
+        <button type="button" class="card-register" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Register</button>
+      </article>
+
+      <!-- Card 3: Placement -->
+      <article class="event-card" data-category="placement">
+        <span class="badge badge-placement">Placement</span>
+        <h3>Career Bridge Drive</h3>
+        <dl class="event-meta">
+          <div><dt>Date &amp; Time</dt><dd>18 Sept 2026, 10:00 AM</dd></div>
+          <div><dt>Venue</dt><dd>Placement Cell, Block&nbsp;C</dd></div>
+        </dl>
+        <p class="event-desc">Pre-placement talks and mock interviews with recruiting partners from twelve companies.</p>
+        <p class="status status-closing">Closing Soon</p>
+        <button type="button" class="card-register" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Register</button>
+      </article>
+
+      <!-- Card 4: Sports -->
+      <article class="event-card" data-category="sports">
+        <span class="badge badge-sports">Sports</span>
+        <h3>Campus Sprint Relay</h3>
+        <dl class="event-meta">
+          <div><dt>Date &amp; Time</dt><dd>20 Sept 2026, 4:00 PM</dd></div>
+          <div><dt>Venue</dt><dd>Main Athletic Ground</dd></div>
+        </dl>
+        <p class="event-desc">Inter-department 4x100m relay heats followed by finals under floodlights.</p>
+        <p class="status status-open">Registration Open</p>
+        <button type="button" class="card-register" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Register</button>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ REGISTRATION FORM ============ -->
+<section id="register" aria-labelledby="register-heading">
+  <div class="section-inner">
+    <h2 id="register-heading">Reserve Your Spot</h2>
+    <p class="section-lead">One form covers every event &mdash; fill it once, choose your track below.</p>
+
+    <form id="registration-form" novalidate>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="student-name">Full Name</label>
+          <input type="text" id="student-name" name="studentName" placeholder="e.g. Priya Ramanathan" required>
+        </div>
+        <div class="form-field">
+          <label for="register-no">Register Number</label>
+          <input type="text" id="register-no" name="registerNo" placeholder="e.g. 22APCS0142" required pattern="[A-Za-z0-9]+">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="department">Department</label>
+          <select id="department" name="department" required>
+            <option value="" disabled selected>Select department</option>
+            <option value="cse">Computer Science &amp; Engineering</option>
+            <option value="ece">Electronics &amp; Communication</option>
+            <option value="mech">Mechanical Engineering</option>
+            <option value="civil">Civil Engineering</option>
+            <option value="it">Information Technology</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="you@university.edu" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field form-field-wide">
+          <label for="event-select">Event Selection</label>
+          <select id="event-select" name="event" required>
+            <option value="" disabled selected>Choose an event</option>
+            <option value="hackathon">Byte Storm Hackathon &mdash; Technical</option>
+            <option value="cultural">Rhythm &amp; Roots Night &mdash; Cultural</option>
+            <option value="placement">Career Bridge Drive &mdash; Placement</option>
+            <option value="sports">Campus Sprint Relay &mdash; Sports</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-button">Submit Registration</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- Fixed help button: positioning-beyond-normal-flow demonstration -->
+<a href="#register" class="help-button" aria-label="Jump to registration form">Need&nbsp;Help?</a>
+
+<!-- ============ FOOTER ============ -->
+<footer id="site-footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Anna Presidency University</h4>
+      <p>Student Activity Centre, Block A, Chennai&nbsp;600001</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>events@annapresidency.edu.in</p>
+      <p>+91 44 2345 6789</p>
+    </div>
+    <div class="footer-col">
+      <h4>Useful Links</h4>
+      <ul class="footer-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#catalogue">Event Catalogue</a></li>
+        <li><a href="#register">Registration</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="copyright">&copy; 2026 Anna Presidency University. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
