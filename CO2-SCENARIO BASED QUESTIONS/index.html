@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexora — Sindhuja University Event Registration Portal</title>
+
+<!-- External stylesheet: primary CSS method for the whole site -->
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!--
+  INTERNAL CSS (required demonstration)
+  Scope: Hero section only. Everything else lives in style.css (external).
+  Justification for choice of method is documented in TECHNICAL_NOTE.md,
+  section "1. CSS Methods".
+-->
+<style>
+  /* --- Internal CSS: applies ONLY to the .hero section --- */
+  .hero {
+    background:
+      radial-gradient(circle at 15% 20%, rgba(180, 126, 234, 0.22), transparent 45%),
+      linear-gradient(135deg, #4C2E82 0%, #6C3FB5 55%, #2A1750 100%);
+  }
+  .hero__eyebrow {
+    text-shadow: 0 2px 12px rgba(180, 126, 234, 0.4);
+  }
+  .hero__title {
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand__mark">NX</span>
+      <div class="brand__text">
+        <span class="brand__university">Sindhuja University</span>
+        <span class="brand__portal">Nexora · Event Registration Portal</span>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav-menu">
+        <li><a href="#top">Home</a></li>
+        <li><a href="#catalogue">Events</a></li>
+        <li><a href="#register">Register</a></li>
+        <li><a href="#footer">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero__content">
+    <p class="hero__eyebrow">Annual Campus Festival · Reg. window open</p>
+    <h1 class="hero__title">Code. Create. Compete.</h1>
+    <p class="hero__sub">
+      One registration, every event on campus —
+      <!-- INLINE CSS (required demonstration): one small element only -->
+      <span style="color:#B47EEA; font-weight:600;">seats are limited this year.</span>
+    </p>
+    <p class="hero__dates"><span class="mono">CAMPAIGN&nbsp;PERIOD</span> 02 – 20 September 2026</p>
+    <a class="btn btn--primary" href="#register">Register for an event →</a>
+  </div>
+</section>
+
+<!-- ============ EVENT CATALOGUE ============ -->
+<section class="catalogue" id="catalogue">
+  <div class="section-head">
+    <h2>This year's line-up</h2>
+    <p>Four tracks, one badge each — pick the ones that match your crew.</p>
+  </div>
+
+  <div class="card-grid">
+
+    <!-- Card 1: Technical -->
+    <article class="event-card card--spotlight" data-category="technical">
+      <div class="event-card__stub">
+        <span class="mono">#TCH-01</span>
+        <span class="mono">08:00</span>
+      </div>
+      <div class="event-card__body">
+        <span class="status-badge status-badge--open">Open</span>
+        <p class="event-card__category">Technical</p>
+        <h3>HackNorth 24hr Hackathon</h3>
+        <p class="event-card__meta">14 Sept 2026 · 8:00 AM – Next day 8:00 AM</p>
+        <p class="event-card__meta">Venue: Akshaya Block, Lab 3</p>
+        <p class="event-card__desc">Build a working prototype in 24 hours across five open problem statements. Mentors on call throughout the night.</p>
+        <a class="btn btn--card" href="#register">Register</a>
+      </div>
+    </article>
+
+    <!-- Card 2: Cultural -->
+    <article class="event-card" data-category="cultural">
+      <div class="event-card__stub">
+        <span class="mono">#CUL-02</span>
+        <span class="mono">17:30</span>
+      </div>
+      <div class="event-card__body">
+        <span class="status-badge status-badge--open">Open</span>
+        <p class="event-card__category">Cultural</p>
+        <h3>Rhythms — Battle of Bands</h3>
+        <p class="event-card__meta">16 Sept 2026 · 5:30 PM – 9:00 PM</p>
+        <p class="event-card__meta">Venue: Akshaya Block, Open Air Theatre</p>
+        <p class="event-card__desc">Campus bands go head-to-head in three rounds. Original composition round is judged by an alumni panel.</p>
+        <a class="btn btn--card" href="#register">Register</a>
+      </div>
+    </article>
+
+    <!-- Card 3: Placement -->
+    <article class="event-card" data-category="placement">
+      <div class="event-card__stub">
+        <span class="mono">#PLC-03</span>
+        <span class="mono">09:00</span>
+      </div>
+      <div class="event-card__body">
+        <span class="status-badge status-badge--closing">Closing soon</span>
+        <p class="event-card__category">Placement</p>
+        <h3>Career Summit &amp; Mock Interviews</h3>
+        <p class="event-card__meta">18 Sept 2026 · 9:00 AM – 4:00 PM</p>
+        <p class="event-card__meta">Venue: Akshaya Block, Placement Cell</p>
+        <p class="event-card__desc">Resume clinics, recruiter panels and 1:1 mock interviews with visiting industry partners.</p>
+        <a class="btn btn--card" href="#register">Register</a>
+      </div>
+    </article>
+
+    <!-- Card 4: Sports -->
+    <article class="event-card" data-category="sports">
+      <div class="event-card__stub">
+        <span class="mono">#SPT-04</span>
+        <span class="mono">06:30</span>
+      </div>
+      <div class="event-card__body">
+        <span class="status-badge status-badge--open">Open</span>
+        <p class="event-card__category">Sports</p>
+        <h3>Inter-Department Sports Meet</h3>
+        <p class="event-card__meta">20 Sept 2026 · 6:30 AM – 6:00 PM</p>
+        <p class="event-card__meta">Venue: Akshaya Block, Sports Ground</p>
+        <p class="event-card__desc">Athletics, relay and department cricket finals. Registrations include team and individual events.</p>
+        <a class="btn btn--card" href="#register">Register</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ REGISTRATION FORM ============ -->
+<section class="registration" id="register">
+  <div class="section-head">
+    <h2>Register in under a minute</h2>
+    <p>One form covers every event on this page.</p>
+  </div>
+
+  <form id="registrationForm" class="reg-form" novalidate>
+    <div class="reg-form__grid">
+
+      <div class="field">
+        <label for="fullName">Full name</label>
+        <input type="text" id="fullName" name="fullName" placeholder="e.g. Sindhuja" required>
+      </div>
+
+      <div class="field">
+        <label for="regNo">Register number</label>
+        <input type="text" id="regNo" name="regNo" placeholder="e.g. 3122xxxxxxxx" required>
+      </div>
+
+      <div class="field">
+        <label for="department">Department</label>
+        <select id="department" name="department" required>
+          <option value="" disabled selected>Select department</option>
+          <option value="cse">Computer Science &amp; Engineering</option>
+          <option value="ece">Electronics &amp; Communication</option>
+          <option value="mech">Mechanical Engineering</option>
+          <option value="civil">Civil Engineering</option>
+          <option value="it">Information Technology</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="email">College email address</label>
+        <input type="email" id="email" name="email" placeholder="you@college.edu" required>
+      </div>
+
+      <div class="field field--full">
+        <label for="eventSelect">Event</label>
+        <select id="eventSelect" name="eventSelect" required>
+          <option value="" disabled selected>Choose an event to register for</option>
+          <option value="hackathon">Technical — HackNorth 24hr Hackathon</option>
+          <option value="bands">Cultural — Rhythms: Battle of Bands</option>
+          <option value="career">Placement — Career Summit &amp; Mock Interviews</option>
+          <option value="sports">Sports — Inter-Department Sports Meet</option>
+        </select>
+      </div>
+
+    </div>
+
+    <button type="submit" class="btn btn--primary btn--submit">Submit registration</button>
+  </form>
+</section>
+
+<!-- Fixed help button — positioning beyond normal flow -->
+<button class="help-btn" type="button" title="Need help registering?" aria-label="Help">?</button>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Nexora</h4>
+      <p>Student Activity Centre, Akshaya Block<br>Sindhuja University, Chennai, Tamil Nadu 600123</p>
+      <p>events@sindhuja.edu · +91 44 2345 6789</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Useful links</h4>
+      <ul class="footer-links">
+        <li><a href="#catalogue">Event catalogue</a></li>
+        <li><a href="#register">Registration form</a></li>
+        <li><a href="#top">Back to top</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Office hours</h4>
+      <p>Mon – Fri, 9:00 AM – 5:00 PM</p>
+      <p>Response within 1 working day</p>
+    </div>
+  </div>
+
+  <p class="footer-copyright">© 2026 Sindhuja University — Nexora. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

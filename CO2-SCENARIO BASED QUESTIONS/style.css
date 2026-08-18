@@ -1,0 +1,539 @@
+/* ==========================================================================
+   CAMPUS CONNECT — EXTERNAL STYLESHEET
+   Unit II Scenario: Responsive University Event Registration Portal
+   Sections:
+     1. Custom properties (design tokens)
+     2. Reset & base / normal document flow
+     3. Header & navigation (sticky positioning)
+     4. Hero (layout only — visual gradient is in the internal <style> block)
+     5. Event catalogue — Grid layout + Box Model demo
+     6. Registration form
+     7. Fixed help button (positioned beyond normal flow)
+     8. Footer
+     9. Responsive media queries
+   ========================================================================== */
+
+/* -------------------------- 1. CUSTOM PROPERTIES ------------------------- */
+:root {
+  --ink: #241B2F;
+  --ink-soft: #5B4E6C;
+  --paper: #F5F1FA;
+  --card-bg: #FFFFFF;
+  --navy: #4C2E82;
+  --navy-soft: #6C3FB5;
+  --amber: #B47EEA;
+  --teal: #8B5FBF;
+  --coral: #E85A4F;
+  --border: #E3D9F0;
+
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+
+  --radius: 14px;
+  --shadow-card: 0 10px 30px rgba(20, 22, 31, 0.08);
+  --shadow-card-hover: 0 18px 40px rgba(20, 22, 31, 0.14);
+  --max-width: 1120px;
+}
+
+/* ----------------------- 2. RESET & NORMAL FLOW -------------------------- */
+/* Element selector + group selector */
+* ,
+*::before,
+*::after {
+  box-sizing: border-box; /* affects layout children; card--spotlight is
+                              deliberately reset to content-box below to
+                              demonstrate the default box model */
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.6;
+  overflow-x: hidden; /* guarantees no horizontal scroll on mobile */
+}
+
+/* Group selector: shared heading rhythm */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  line-height: 1.15;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+.mono { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; }
+
+/* Buttons — shared, then variants via class selector */
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.6rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.btn--primary {
+  background: var(--amber);
+  color: var(--navy);
+}
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(180, 126, 234, 0.35);
+}
+
+.btn--card {
+  background: var(--navy);
+  color: #fff;
+  font-size: 0.85rem;
+  padding: 0.6rem 1.2rem;
+}
+.btn--card:hover,
+.btn--card:focus-visible {
+  background: var(--teal);
+  transform: translateY(-1px);
+}
+
+/* -------------------------- 3. HEADER / NAV ------------------------------ */
+.site-header {
+  position: sticky; /* beyond-normal-flow technique #1 */
+  top: 0;
+  z-index: 50;       /* stacking above hero and cards */
+  background: var(--navy);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.brand { display: flex; align-items: center; gap: 0.75rem; }
+
+.brand__mark {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--navy);
+  background: var(--amber);
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+}
+
+.brand__text { display: flex; flex-direction: column; }
+.brand__university { color: #fff; font-size: 0.85rem; font-weight: 600; }
+.brand__portal { color: #C9B8E0; font-size: 0.75rem; }
+
+/* Descendant selector: menu items inside nav */
+.nav ul.nav-menu {
+  display: flex;
+  gap: 1.75rem;
+  list-style: none; /* required property: list-style */
+}
+
+/* Child selector: direct <li> children of the nav menu only */
+.nav-menu > li {
+  position: relative;
+}
+
+.nav-menu a {
+  color: #E7DFF5;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.4rem 0.1rem;
+}
+
+/* Pseudo-element + hover state (required) */
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: var(--amber);
+  transition: width 0.25s ease;
+}
+.nav-menu a:hover::after,
+.nav-menu a:focus-visible::after {
+  width: 100%;
+}
+
+/* -------------------------------- 4. HERO -------------------------------- */
+/* Visual gradient background lives in the internal <style> block by design
+   requirement; layout/spacing lives here in the external sheet. */
+.hero {
+  padding: 5rem 1.5rem 6rem;
+  text-align: left;
+}
+
+.hero__content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.hero__eyebrow {
+  font-family: var(--font-mono);
+  color: var(--amber);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.hero__title {
+  color: #fff;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  max-width: 14ch; /* required property: max-width */
+  margin-bottom: 1.1rem;
+}
+
+.hero__sub {
+  color: #D9CBEA;
+  font-size: 1.05rem;
+  max-width: 46ch;
+  margin-bottom: 0.75rem;
+}
+
+.hero__dates {
+  color: #D9CBEA;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+.hero__dates .mono {
+  color: var(--amber);
+  margin-right: 0.5rem;
+}
+
+/* ------------------- 5. EVENT CATALOGUE — GRID + BOX MODEL --------------- */
+.catalogue {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem 2rem;
+}
+
+.section-head { margin-bottom: 2.25rem; max-width: 60ch; }
+.section-head h2 { font-size: 1.9rem; margin-bottom: 0.5rem; }
+.section-head p { color: var(--ink-soft); }
+
+/* CSS Grid: primary layout for the event catalogue (multi-column desktop) */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+}
+
+/* Class selector — base card. Every card visibly shows the box model:
+   background = content area, visible padding, a border, and margin
+   (via grid `gap`, which behaves like margin between grid items). */
+.event-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;           /* required property: overflow */
+  display: flex;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;         /* establishes a positioning context for the badge */
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/*
+  ---- BOX MODEL DEMONSTRATION CARD ----
+  ID-selector card used for the required width calculation (see
+  TECHNICAL_NOTE.md). This single card is deliberately reset to the
+  DEFAULT content-box model so the numbers are easy to verify in
+  DevTools:
+
+      content width : 300px
+      padding       : 20px  (left + right = 40px)
+      border         : 2px  (left + right = 4px)
+      margin         : 16px (left + right = 32px)
+
+      Total width occupied by the box  = 300 + 40 + 4        = 344px
+      Total footprint including margin = 344 + 32             = 376px
+
+  With box-sizing: border-box applied instead, the declared 300px would
+  become the FINAL border-box width: content shrinks to
+  300 - 40 (padding) - 4 (border) = 256px, while the element's own
+  rendered width stays fixed at 300px regardless of border/padding.
+*/
+.card--spotlight {
+  box-sizing: content-box; /* explicit override for the calculation demo */
+  width: 300px;
+  padding: 20px;
+  border: 2px solid var(--navy);
+  margin: 16px;
+  flex-direction: column;
+  grid-column: 1 / -1; /* full width banner on desktop */
+}
+.card--spotlight .event-card__body { padding: 1.5rem 1.75rem; }
+
+.event-card__stub {
+  background: var(--navy);
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 0.85rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-width: 4.5rem;
+  border-right: 2px dashed rgba(255, 255, 255, 0.35); /* ticket-stub signature */
+}
+
+.event-card__body {
+  padding: 1.25rem 1.4rem;
+  flex: 1;
+}
+
+/* Attribute selector (required) — targets cards by data-category */
+.event-card[data-category="technical"] .event-card__category { color: var(--teal); }
+.event-card[data-category="cultural"]  .event-card__category { color: #7A5FD1; }
+.event-card[data-category="placement"] .event-card__category { color: var(--coral); }
+.event-card[data-category="sports"]    .event-card__category { color: var(--amber); }
+
+.event-card__category {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+}
+
+.event-card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+
+.event-card__meta {
+  font-size: 0.83rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.2rem;
+}
+
+.event-card__desc {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin: 0.75rem 0 1.1rem;
+}
+
+/* Status badge: absolute positioning beyond-normal-flow technique #2,
+   plus z-index and transform (rotation) */
+.status-badge {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 5;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  transform: rotate(2deg);
+}
+.status-badge--open {
+  background: rgba(139, 95, 191, 0.12);
+  color: var(--teal);
+}
+.status-badge--closing {
+  background: rgba(232, 90, 79, 0.12);
+  color: var(--coral);
+}
+
+/* --------------------------- 6. REGISTRATION FORM ------------------------ */
+.registration {
+  background: #fff;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 4rem 1.5rem 4.5rem;
+}
+
+.reg-form {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.reg-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.field--full { grid-column: 1 / -1; }
+
+.field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--ink-soft);
+}
+
+/* Group selector for form controls */
+.field input,
+.field select {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Attribute selector: only text/email inputs get the caret cursor */
+.field input[type="text"],
+.field input[type="email"] {
+  cursor: text;
+}
+
+/* Focus state (required) */
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(139, 95, 191, 0.15);
+}
+
+/* Pseudo-element: placeholder styling */
+.field input::placeholder {
+  color: #A99BB8;
+}
+
+.btn--submit {
+  width: 100%;
+}
+
+/* ------------------------- 7. FIXED HELP BUTTON --------------------------- */
+/* Beyond-normal-flow technique #3: fixed positioning, kept clear of the
+   form and footer content by generous offsets so nothing is ever hidden. */
+.help-btn {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  z-index: 40;
+  width: 3.1rem;
+  height: 3.1rem;
+  border-radius: 50%;
+  border: none;
+  background: var(--navy);
+  color: var(--amber);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(20, 22, 31, 0.28);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.help-btn:hover,
+.help-btn:focus-visible {
+  background: var(--teal);
+  transform: scale(1.08);
+}
+
+/* -------------------------------- 8. FOOTER ------------------------------- */
+.site-footer {
+  background: var(--navy);
+  color: #D9CBEA;
+  padding: 3.5rem 1.5rem 1.5rem;
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.footer-col h4 {
+  color: #fff;
+  font-size: 0.95rem;
+  margin-bottom: 0.9rem;
+}
+
+.footer-col p { font-size: 0.85rem; margin-bottom: 0.4rem; }
+
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 0.5rem; }
+.footer-links a { font-size: 0.85rem; transition: color 0.2s ease; }
+.footer-links a:hover,
+.footer-links a:focus-visible { color: var(--amber); }
+
+.footer-copyright {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.78rem;
+  color: #A796C0;
+  text-align: center;
+}
+
+/* ============================ 9. RESPONSIVE =============================== */
+/* Tablet adjustment */
+@media (max-width: 860px) {
+  .card-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+
+/* Mobile — tested at ~375px width (required) */
+@media (max-width: 480px) {
+  .header-inner { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .nav ul.nav-menu { gap: 1.1rem; flex-wrap: wrap; }
+
+  .hero { padding: 3rem 1.25rem 3.5rem; text-align: left; }
+  .hero__title { max-width: 100%; }
+
+  .catalogue { padding: 3rem 1.25rem 1rem; }
+  .card-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+
+  .card--spotlight {
+    width: 100%;           /* box-model demo card must not overflow on mobile */
+    margin: 0 0 1.25rem;
+    flex-direction: column;
+  }
+  .event-card__stub {
+    flex-direction: row;
+    justify-content: space-between;
+    border-right: none;
+    border-bottom: 2px dashed rgba(255, 255, 255, 0.35);
+  }
+
+  .registration { padding: 3rem 1.25rem 3.5rem; }
+  .reg-form__grid { grid-template-columns: 1fr; }
+  .field--full { grid-column: auto; }
+
+  .footer-inner { grid-template-columns: 1fr; gap: 1.75rem; }
+
+  .help-btn { bottom: 1.1rem; right: 1.1rem; }
+}
