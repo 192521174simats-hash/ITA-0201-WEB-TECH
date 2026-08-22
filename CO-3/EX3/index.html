@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head><title>Interactive Event Registration</title>
+<style>
+body{font-family:Arial;background:#fff7ed;padding:35px}.box{max-width:600px;margin:auto;background:white;padding:25px;border-radius:15px}
+button,input,select{padding:10px;margin:5px}#output{margin-top:15px;padding:15px;background:#fef3c7}
+</style></head>
+<body>
+<div class="box">
+<h2>Interactive Event Registration</h2>
+<input id="name" placeholder="Name">
+<select id="event"><option>Web Development</option><option>AI Workshop</option><option>Cloud Computing</option></select>
+<button id="register">Register</button>
+<button id="reset">Reset</button>
+<div id="output">Choose an event and register.</div>
+</div>
+<script>
+const name=document.getElementById("name");
+const event=document.getElementById("event");
+const output=document.getElementById("output");
+document.getElementById("register").addEventListener("click",function(){
+ if(!name.value.trim()){output.textContent="Please enter your name.";return;}
+ output.textContent=name.value+" registered successfully for "+event.value+".";
+});
+document.getElementById("reset").addEventListener("click",function(){
+ name.value="";event.selectedIndex=0;output.textContent="Form reset.";
+});
+event.addEventListener("change",function(){output.textContent="Selected event: "+event.value;});
+name.addEventListener("focus",function(){output.style.border="2px solid blue";});
+name.addEventListener("blur",function(){output.style.border="none";});
+name.addEventListener("mouseover",function(){output.textContent="Enter your name and select an event.";});
+</script>
+</body></html>

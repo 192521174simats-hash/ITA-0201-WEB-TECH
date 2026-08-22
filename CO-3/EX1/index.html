@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DOM-Based Student Profile Manipulation</title>
+<style>
+body{font-family:Arial;background:#f3e8ff;margin:40px}
+.card{max-width:600px;margin:auto;background:white;padding:25px;border-radius:15px;box-shadow:0 4px 15px #bbb}
+input{padding:9px;margin:5px;width:90%} button{padding:10px;margin:5px;cursor:pointer}
+#profile{padding:15px;margin-top:15px;border:2px solid #7c3aed;border-radius:10px}
+</style>
+</head>
+<body>
+<div class="card">
+<h2>Student Profile</h2>
+<label>Name</label><input id="name" value="Priya">
+<label>Department</label><input id="dept" value="Computer Science">
+<label>Year</label><input id="year" value="III Year">
+<button onclick="updateProfile()">Update Profile</button>
+<button onclick="changeColor()">Change Colour</button>
+<div id="profile">
+<h3 id="pname">Priya</h3>
+<p id="pdept">Computer Science</p>
+<p id="pyear">III Year</p>
+</div>
+</div>
+<script>
+function updateProfile(){
+ document.getElementById("pname").textContent=document.getElementById("name").value;
+ document.getElementById("pdept").textContent=document.getElementById("dept").value;
+ document.getElementById("pyear").textContent=document.getElementById("year").value;
+}
+function changeColor(){
+ const p=document.getElementById("profile");
+ p.style.backgroundColor=p.style.backgroundColor==="lightblue"?"lightyellow":"lightblue";
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head><title>Dynamic Student Registration List</title>
+<style>
+body{font-family:Arial;background:#eef6ff;padding:30px}
+.container{max-width:800px;margin:auto;background:white;padding:25px;border-radius:12px}
+input,button{padding:9px;margin:4px} table{width:100%;border-collapse:collapse;margin-top:15px}
+th,td{border:1px solid #aaa;padding:9px;text-align:center}
+</style></head>
+<body>
+<div class="container">
+<h2>Student Registration List</h2>
+<input id="name" placeholder="Student Name">
+<input id="reg" placeholder="Register Number">
+<input id="dept" placeholder="Department">
+<button onclick="addStudent()">Add Student</button>
+<button onclick="removeLast()">Remove Last</button>
+<button onclick="clearAll()">Clear All</button>
+<table>
+<thead><tr><th>Name</th><th>Register No.</th><th>Department</th><th>Action</th></tr></thead>
+<tbody id="studentBody"></tbody>
+</table>
+</div>
+<script>
+function addStudent(){
+ const name=document.getElementById("name").value.trim();
+ const reg=document.getElementById("reg").value.trim();
+ const dept=document.getElementById("dept").value.trim();
+ if(!name||!reg||!dept){alert("Enter all details");return;}
+ const row=document.createElement("tr");
+ [name,reg,dept].forEach(v=>{let td=document.createElement("td");td.textContent=v;row.appendChild(td);});
+ let td=document.createElement("td");
+ let btn=document.createElement("button");btn.textContent="Delete";
+ btn.onclick=()=>row.remove();td.appendChild(btn);row.appendChild(td);
+ document.getElementById("studentBody").appendChild(row);
+ document.getElementById("name").value="";document.getElementById("reg").value="";document.getElementById("dept").value="";
+}
+function removeLast(){
+ const body=document.getElementById("studentBody");
+ if(body.lastElementChild) body.removeChild(body.lastElementChild);
+}
+function clearAll(){document.getElementById("studentBody").innerHTML="";}
+</script>
+</body></html>

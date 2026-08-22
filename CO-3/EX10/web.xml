@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee" version="6.0">
+<servlet><servlet-name>basic</servlet-name><servlet-class>BasicServlet</servlet-class></servlet>
+<servlet-mapping><servlet-name>basic</servlet-name><url-pattern>/basic</url-pattern></servlet-mapping>
+<servlet><servlet-name>registration</servlet-name><servlet-class>RegistrationServlet</servlet-class></servlet>
+<servlet-mapping><servlet-name>registration</servlet-name><url-pattern>/registration</url-pattern></servlet-mapping>
+<servlet><servlet-name>result</servlet-name><servlet-class>ResultServlet</servlet-class></servlet>
+<servlet-mapping><servlet-name>result</servlet-name><url-pattern>/result</url-pattern></servlet-mapping>
+<servlet><servlet-name>lifecycle</servlet-name><servlet-class>LifecycleServlet</servlet-class></servlet>
+<servlet-mapping><servlet-name>lifecycle</servlet-name><url-pattern>/lifecycle</url-pattern></servlet-mapping>
+<servlet><servlet-name>counter</servlet-name><servlet-class>CounterServlet</servlet-class></servlet>
+<servlet-mapping><servlet-name>counter</servlet-name><url-pattern>/counter</url-pattern></servlet-mapping>
+</web-app>

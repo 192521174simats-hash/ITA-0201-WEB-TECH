@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head><title>Cross-Browser Compatible Interactive Webpage</title>
+<style>
+body{font-family:Arial;background:#f0fdf4;padding:30px}.box{max-width:700px;margin:auto;background:white;padding:25px;border-radius:15px}
+button{padding:10px;margin:5px}
+</style></head>
+<body>
+<div class="box">
+<h2>Cross-Browser Compatibility Demo</h2>
+<p id="storageStatus"></p>
+<p id="browser"></p>
+<button id="save">Save Preference</button>
+<button id="load">Load Preference</button>
+<button id="clear">Clear Preference</button>
+</div>
+<script>
+function supportsStorage(){
+ try{return typeof Storage!=="undefined" && localStorage!==null;}
+ catch(e){return false;}
+}
+function show(){
+ document.getElementById("storageStatus").textContent =
+ supportsStorage() ? "localStorage is supported." : "localStorage is not supported.";
+ document.getElementById("browser").textContent =
+ "Current browser: "+navigator.userAgent;
+}
+document.getElementById("save").onclick=function(){
+ if(supportsStorage()){localStorage.setItem("studentPreference","Dark Mode Disabled");alert("Preference saved.");}
+ else alert("localStorage is not supported.");
+};
+document.getElementById("load").onclick=function(){
+ if(supportsStorage()) alert("Saved preference: "+(localStorage.getItem("studentPreference")||"No data"));
+};
+document.getElementById("clear").onclick=function(){
+ if(supportsStorage()){localStorage.removeItem("studentPreference");alert("Preference cleared.");}
+};
+show();
+</script>
+</body></html>
