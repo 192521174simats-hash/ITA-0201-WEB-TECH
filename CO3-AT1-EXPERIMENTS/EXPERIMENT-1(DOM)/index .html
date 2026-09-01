@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Enrollment Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --ink: #1B2340;
+        --ink-soft: #5C6B8A;
+        --paper: #FBF7EE;
+        --paper-line: #E4DCC8;
+        --brass: #B08D2B;
+        --brass-dark: #8C6E1F;
+        --night: #141A30;
+        --night-deep: #0D1122;
+        --error: #A6472F;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        font-family: 'Inter', Arial, sans-serif;
+        margin: 0;
+        padding: 48px 20px;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        background:
+            radial-gradient(circle at 15% 10%, rgba(176,141,43,0.10), transparent 45%),
+            radial-gradient(circle at 85% 90%, rgba(176,141,43,0.06), transparent 40%),
+            linear-gradient(180deg, var(--night-deep) 0%, var(--night) 100%);
+        background-attachment: fixed;
+    }
+
+    .container {
+        background: var(--paper);
+        padding: 40px 44px 36px;
+        border-radius: 3px;
+        box-shadow: 0 30px 60px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(176,141,43,0.15);
+        width: 520px;
+        max-width: 100%;
+        position: relative;
+    }
+
+    .container::before {
+        content: "";
+        position: absolute;
+        top: 14px; left: 14px; right: 14px; bottom: 14px;
+        border: 1px solid var(--paper-line);
+        pointer-events: none;
+    }
+
+    .letterhead {
+        text-align: center;
+        margin-bottom: 26px;
+    }
+
+    .letterhead .mark {
+        font-family: 'Fraunces', serif;
+        font-size: 13px;
+        letter-spacing: 0.12em;
+        color: var(--brass-dark);
+        margin: 0 0 4px;
+    }
+
+    h2 {
+        font-family: 'Fraunces', serif;
+        font-weight: 500;
+        font-size: 26px;
+        color: var(--ink);
+        margin: 0;
+        letter-spacing: 0.01em;
+    }
+
+    .letterhead .sub {
+        font-size: 12.5px;
+        color: var(--ink-soft);
+        margin: 6px 0 0;
+    }
+
+    hr.rule {
+        border: none;
+        border-top: 1px solid var(--paper-line);
+        margin: 22px 0 20px;
+    }
+
+    label {
+        display: block;
+        margin-top: 16px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink);
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px 4px;
+        margin-top: 6px;
+        border: none;
+        border-bottom: 1.5px solid var(--paper-line);
+        border-radius: 0;
+        background: transparent;
+        font-size: 15px;
+        font-family: 'Inter', Arial, sans-serif;
+        color: var(--ink);
+        transition: border-color 0.2s;
+    }
+
+    input::placeholder { color: #B7B0A0; }
+
+    input:focus, select:focus {
+        outline: none;
+        border-bottom-color: var(--brass);
+    }
+
+    select {
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%235C6B8A'%3E%3Cpath d='M5.5 7.5l4.5 4.5 4.5-4.5' stroke='%235C6B8A' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 2px center;
+        background-size: 16px;
+        padding-right: 24px;
+    }
+
+    input.error, select.error {
+        border-bottom-color: var(--error);
+    }
+
+    .btn-group {
+        margin-top: 30px;
+        display: flex;
+        gap: 12px;
+    }
+
+    button {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid transparent;
+        border-radius: 2px;
+        font-size: 14px;
+        font-weight: 600;
+        font-family: 'Inter', Arial, sans-serif;
+        letter-spacing: 0.01em;
+        cursor: pointer;
+        transition: 0.18s ease;
+    }
+
+    #displayBtn {
+        background: var(--ink);
+        color: var(--paper);
+    }
+    #displayBtn:hover { background: #2A3660; }
+
+    #removeBtn {
+        background: transparent;
+        color: var(--ink-soft);
+        border-color: var(--paper-line);
+    }
+    #removeBtn:hover { color: var(--error); border-color: var(--error); }
+
+    #profileCard {
+        margin-top: 26px;
+        padding: 22px 24px 20px;
+        border: 1px solid var(--paper-line);
+        background: #FFFDF8;
+        display: none;
+        position: relative;
+    }
+    #profileCard.show {
+        display: block;
+        animation: fadeIn 0.35s ease-in-out;
+    }
+
+    #profileCard .seal {
+        position: absolute;
+        top: -14px;
+        right: 20px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--brass);
+        color: var(--paper);
+        font-family: 'Fraunces', serif;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 8px rgba(140,110,31,0.4);
+    }
+
+    #profileCard h3 {
+        margin: 0 0 14px;
+        font-family: 'Fraunces', serif;
+        font-weight: 500;
+        font-size: 17px;
+        color: var(--ink);
+        border-bottom: 1px solid var(--paper-line);
+        padding-bottom: 10px;
+    }
+    #profileCard p {
+        margin: 9px 0;
+        font-size: 14.5px;
+        color: var(--ink);
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+    }
+    #profileCard p span {
+        font-weight: 600;
+        color: var(--ink-soft);
+        font-size: 12.5px;
+        letter-spacing: 0.02em;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-8px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        #profileCard.show { animation: none; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="letterhead">
+        <h2>Student Enrollment Form</h2>
+    </div>
+
+    <hr class="rule">
+
+    <label for="name">Name</label>
+    <input type="text" id="name" placeholder="Enter full name">
+
+    <label for="regNo">Register Number</label>
+    <input type="text" id="regNo" placeholder="Enter register number">
+
+    <label for="dept">Department</label>
+    <input type="text" id="dept" placeholder="Enter department">
+
+    <label for="year">Year of Study</label>
+    <select id="year">
+        <option value="">— Select year —</option>
+        <option value="1st Year">1st Year</option>
+        <option value="2nd Year">2nd Year</option>
+        <option value="3rd Year">3rd Year</option>
+        <option value="4th Year">4th Year</option>
+    </select>
+
+    <div class="btn-group">
+        <button id="displayBtn">Display profile</button>
+        <button id="removeBtn">Remove profile</button>
+    </div>
+
+    <!-- Dynamically generated profile card -->
+    <div id="profileCard"></div>
+</div>
+
+<script>
+    // Select elements using getElementById and querySelector
+    const nameInput  = document.getElementById('name');
+    const regInput   = document.querySelector('#regNo');
+    const deptInput  = document.querySelector('#dept');
+    const yearInput  = document.getElementById('year');
+
+    const displayBtn = document.getElementById('displayBtn');
+    const removeBtn  = document.querySelector('#removeBtn');
+    const profileCard = document.getElementById('profileCard');
+
+    // Event: Display Profile
+    displayBtn.addEventListener('click', function () {
+        const name  = nameInput.value.trim();
+        const reg   = regInput.value.trim();
+        const dept  = deptInput.value.trim();
+        const year  = yearInput.value;
+
+        // Basic validation
+        if (!name || !reg || !dept || !year) {
+            [nameInput, regInput, deptInput, yearInput].forEach(el => {
+                if (!el.value.trim()) el.classList.add('error');
+                else el.classList.remove('error');
+            });
+            alert('Please fill in all fields before displaying the profile.');
+            return;
+        } else {
+            [nameInput, regInput, deptInput, yearInput].forEach(el => el.classList.remove('error'));
+        }
+
+        // Clear previous content (element removal)
+        profileCard.innerHTML = '';
+
+        // Seal mark
+        const seal = document.createElement('div');
+        seal.className = 'seal';
+        seal.textContent = 'SR';
+        profileCard.appendChild(seal);
+
+        // Build profile dynamically using createElement + textContent
+        const heading = document.createElement('h3');
+        heading.textContent = 'Enrollment Record';
+        profileCard.appendChild(heading);
+
+        const rows = [
+            ['Name', name],
+            ['Register Number', reg],
+            ['Department', dept],
+            ['Year of Study', year]
+        ];
+
+        rows.forEach(([label, value]) => {
+            const p = document.createElement('p');
+            const span = document.createElement('span');
+            span.textContent = label;
+            p.appendChild(span);
+            p.appendChild(document.createTextNode(value));
+            profileCard.appendChild(p);
+        });
+
+        // Use classList to visually distinguish / show the card
+        profileCard.classList.add('show');
+    });
+
+    // Event: Remove Profile
+    removeBtn.addEventListener('click', function () {
+        profileCard.innerHTML = '';
+        profileCard.classList.remove('show');
+    });
+</script>
+
+</body>
+</html>
