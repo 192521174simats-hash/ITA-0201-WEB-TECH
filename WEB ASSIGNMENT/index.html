@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Saveetha University Course Registration Portal">
+    <title>Saveetha University | Course Registration Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <div class="badge">SAVEETHA UNIVERSITY • ONLINE REGISTRATION</div>
+            <h1>Saveetha University<br><span>Course Registration Portal</span></h1>
+            <p>Explore courses, choose your subjects, and generate your registration summary instantly.</p>
+            <a class="hero-btn" href="#registration">Start Registration <span>→</span></a>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <a class="brand" href="#home"><span class="brand-mark">S</span> Saveetha University</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">☰</button>
+            <div class="nav-links" id="navLinks">
+                <a class="active" href="#home">Home</a>
+                <a href="#courses">Courses</a>
+                <a href="#registration">Registration</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="container section intro-section reveal">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">WELCOME</span>
+                    <h2>Everything you need in one place</h2>
+                </div>
+                <div class="live-pill"><span></span> Registration Open</div>
+            </div>
+
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Explore Courses</h3>
+                    <p>View course codes, credits, and course types before making your selection.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">✓</div>
+                    <h3>Easy Registration</h3>
+                    <p>Complete the form with client-side validation and select your preferred courses.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Summary</h3>
+                    <p>See selected courses, total courses, and total credits without page reload.</p>
+                </article>
+            </div>
+
+            <div class="instruction-grid">
+                <div class="info-card">
+                    <span class="card-number">01</span>
+                    <div>
+                        <h3>Registration Instructions</h3>
+                        <ol>
+                            <li>Enter your Register Number and Student Name.</li>
+                            <li>Provide a valid email address.</li>
+                            <li>Select your department and semester.</li>
+                            <li>Choose one or more available courses.</li>
+                            <li>Click Register to generate the summary.</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <span class="card-number">02</span>
+                    <div>
+                        <h3>Eligibility Requirements</h3>
+                        <ul>
+                            <li>Valid Register Number is required.</li>
+                            <li>Student must belong to a recognized department.</li>
+                            <li>A valid semester from 1 to 8 must be selected.</li>
+                            <li>At least one course must be selected.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="courses" class="container section reveal">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">COURSE CATALOGUE</span>
+                    <h2>Available Courses</h2>
+                    <p>Hover over a course card or use the table below to explore the catalogue.</p>
+                </div>
+                <div class="course-count"><strong>05</strong><span>Courses</span></div>
+            </div>
+
+            <div class="course-preview-grid" id="coursePreview"></div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Course Code</th>
+                            <th>Course Name</th>
+                            <th>Credits</th>
+                            <th>Course Type</th>
+                        </tr>
+                    </thead>
+                    <tbody id="courseTableBody"></tbody>
+                </table>
+            </div>
+
+            <p class="external-link">Need more information? <a href="https://www.example.com" target="_blank" rel="noopener">Visit University Website ↗</a></p>
+        </section>
+
+        <section id="registration" class="container section registration-section reveal">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">STUDENT REGISTRATION</span>
+                    <h2>Build Your Semester</h2>
+                    <p>Fill in your details and select the courses you want to register for.</p>
+                </div>
+                <div class="step-indicator"><span>STEP 1</span> → <span>STEP 2</span> → <span>STEP 3</span></div>
+            </div>
+
+            <form id="registrationForm" novalidate>
+                <div class="form-panel">
+                    <div class="form-panel-title"><span>01</span><div><h3>Student Information</h3><p>Enter your basic registration details.</p></div></div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="registerNumber">Register Number <span>*</span></label>
+                            <input type="text" id="registerNumber" placeholder="e.g. 24IT001" autocomplete="off">
+                            <small class="field-error" id="registerNumberError"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="studentName">Student Name <span>*</span></label>
+                            <input type="text" id="studentName" placeholder="Enter your full name">
+                            <small class="field-error" id="studentNameError"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address <span>*</span></label>
+                            <input type="email" id="email" placeholder="student@example.com">
+                            <small class="field-error" id="emailError"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="department">Department <span>*</span></label>
+                            <select id="department">
+                                <option value="">Select Department</option>
+                                <option value="CSE">Computer Science and Engineering</option>
+                                <option value="IT">Information Technology</option>
+                                <option value="ECE">Electronics and Communication Engineering</option>
+                                <option value="EEE">Electrical and Electronics Engineering</option>
+                            </select>
+                            <small class="field-error" id="departmentError"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="semester">Semester <span>*</span></label>
+                            <select id="semester">
+                                <option value="">Select Semester</option>
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                                <option value="4">Semester 4</option>
+                                <option value="5">Semester 5</option>
+                                <option value="6">Semester 6</option>
+                                <option value="7">Semester 7</option>
+                                <option value="8">Semester 8</option>
+                            </select>
+                            <small class="field-error" id="semesterError"></small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-panel">
+                    <div class="form-panel-title">
+                        <span>02</span>
+                        <div><h3>Select Courses</h3><p>Choose one or more courses from the available options.</p></div>
+                        <div class="selection-counter"><strong id="selectedCount">0</strong> selected</div>
+                    </div>
+
+                    <div class="course-selection-grid" id="courseSelection"></div>
+                    <small class="field-error course-error" id="courseError"></small>
+                </div>
+
+                <div class="form-actions">
+                    <button class="primary-btn" type="submit">Complete Registration <span>→</span></button>
+                    <button class="secondary-btn" type="reset" id="resetButton">Clear Form</button>
+                </div>
+            </form>
+
+            <div id="errorMessage" class="global-error" role="alert"></div>
+
+            <div id="summary" class="summary hidden">
+                <div class="summary-header">
+                    <div>
+                        <span class="success-badge">✓ REGISTRATION SUCCESSFUL</span>
+                        <h2>Registration Summary</h2>
+                        <p>Your course selection has been calculated successfully.</p>
+                    </div>
+                    <div class="summary-total"><span>Total Credits</span><strong id="totalCredits">0</strong></div>
+                </div>
+
+                <div class="summary-details">
+                    <div><span>Student Name</span><strong id="summaryName"></strong></div>
+                    <div><span>Register Number</span><strong id="summaryRegister"></strong></div>
+                    <div><span>Department</span><strong id="summaryDepartment"></strong></div>
+                    <div><span>Semester</span><strong id="summarySemester"></strong></div>
+                </div>
+
+                <div class="selected-summary">
+                    <div class="summary-subheading"><h3>Selected Courses</h3><span id="totalCourses">0 courses</span></div>
+                    <ul id="selectedCourses"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container section contact-section reveal">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">GET IN TOUCH</span>
+                    <h2>Contact Details</h2>
+                    <p>Need help with registration? Contact the university office.</p>
+                </div>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card"><div class="contact-icon">⌖</div><div><span>University Office</span><strong>Saveetha University Campus</strong><p>Chennai, Tamil Nadu</p></div></div>
+                <div class="contact-card"><div class="contact-icon">✉</div><div><span>Email</span><strong>registration@saveetha.edu</strong><p>For registration queries</p></div></div>
+                <div class="contact-card"><div class="contact-icon">☎</div><div><span>Phone</span><strong>+91 98765 43210</strong><p>Mon–Fri, 9 AM–5 PM</p></div></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-inner">
+            <p>© 2026 Saveetha University Course Registration Portal</p>
+            <p>Designed using HTML • CSS • JavaScript</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
